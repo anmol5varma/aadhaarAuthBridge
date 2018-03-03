@@ -1,7 +1,9 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var user = sequelize.define('user', {
-    aadhaar_id: DataTypes.STRING,
+  const user = sequelize.define('user', {
+    aadhaar_id: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     name: DataTypes.STRING,
     dob: DataTypes.DATE,
     gender: DataTypes.STRING,
@@ -15,13 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     dist: DataTypes.STRING,
     state: DataTypes.STRING,
     pc: DataTypes.INTEGER,
-    po: DataTypes.INTEGER
+    po: DataTypes.INTEGER,
   }, {
     classMethods: {
-      associate: function(models) {
+      associate() {
         // associations can be defined here
-      }
-    }
+      },
+    },
   });
   return user;
 };
