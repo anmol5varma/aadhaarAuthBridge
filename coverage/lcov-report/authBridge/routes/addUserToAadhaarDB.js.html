@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>21/21</span>
+        <span class='fraction'>24/24</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>20/20</span>
+        <span class='fraction'>23/23</span>
       </div>
     </div>
   </div>
@@ -70,13 +70,42 @@
 25
 26
 27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -95,33 +124,76 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Models = require('../models');
+const BaseJoi = require('joi');
+const Extension = require('joi-date-extensions');
+&nbsp;
+const Joi = BaseJoi.extend(Extension);
 &nbsp;
 module.exports = [
   {
     method: 'POST',
     path: '/user',
-    handler: (request, reply) =&gt; {
-      const userObject = {};
-      userObject.aadhaar_id = request.payload.aadhaarNo;
-      userObject.name = request.payload.name;
-      userObject.dob = request.payload.dob;
-      userObject.gender = request.payload.gender;
-      userObject.contact = request.payload.contact;
-      userObject.co = request.payload.co;
-      userObject.house = request.payload.house;
-      userObject.street = request.payload.street;
-      userObject.landmark = request.payload.landmark;
-      userObject.lc = request.payload.locality;
-      userObject.subdist = request.payload.subDistrict;
-      userObject.dist = request.payload.district;
-      userObject.state = request.payload.state;
-      userObject.pc = request.payload.pincode;
-      userObject.po = request.payload.pincode;
-      return Models.user.create(userObject).then(() =&gt; reply({ statusCode: 200, message: 'Person added' }))
-        .catch(err =&gt; reply({ statusCode: 500, message: 'Database error', error: err.message }));
+    config: {
+      handler: (request, reply) =&gt; {
+        const userObject = {};
+        userObject.aadhaar_id = request.payload.aadhaarNo;
+        userObject.name = request.payload.name;
+        userObject.dob = request.payload.dob;
+        userObject.gender = request.payload.gender;
+        userObject.contact = request.payload.contact;
+        userObject.co = request.payload.co;
+        userObject.house = request.payload.house;
+        userObject.street = request.payload.street;
+        userObject.landmark = request.payload.landmark;
+        userObject.lc = request.payload.locality;
+        userObject.subdist = request.payload.subDistrict;
+        userObject.dist = request.payload.district;
+        userObject.state = request.payload.state;
+        userObject.pc = request.payload.pincode;
+        userObject.po = request.payload.pincode;
+        return Models.user.create(userObject).then(() =&gt; reply({ statusCode: 200, message: 'Person added' }))
+          .catch(err =&gt; reply({ statusCode: 500, message: 'Database error', error: err.message }));
+      },
+      validate: {
+        payload: Joi.object({
+          aadhaarNo: Joi.string().regex(/^[1-9]{1}[0-9]{11}$/).required(),
+          name: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
+          dob: Joi.date().format('DD-MM-YYYY').required(),
+          gender: Joi.string().regex(/^(male|female|others)$/i).required(),
+          contact: Joi.string().min(10).regex(/^[1-9]{1}[0-9]{9}$/).required(),
+          co: Joi.string().regex(/^[a-zA-Z][a-zA-Z /]*$/).required(),
+          house: Joi.string().regex(/^[0-9a-zA-Z][0-9a-zA-Z -/]*$/).required(),
+          street: Joi.string().regex(/^[0-9a-zA-Z][0-9a-zA-Z -/]*$/).required(),
+          landmark: Joi.string().regex(/^[a-zA-Z -._/#]*$/),
+          locality: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
+          subDistrict: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
+          district: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
+          state: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
+          pincode: Joi.string().regex(/^[1-9]{1}[0-9]{5}$/).required(),
+        }),
+      },
     },
   }];
 &nbsp;</pre></td></tr>
@@ -130,7 +202,7 @@ module.exports = [
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Mar 04 2018 00:05:20 GMT+0530 (IST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Mar 04 2018 00:29:10 GMT+0530 (IST)
 </div>
 </div>
 <script src="../../prettify.js"></script>

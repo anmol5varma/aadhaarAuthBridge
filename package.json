@@ -18,6 +18,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "hapi": "^16.6.2",
+    "joi": "^13.1.2",
+    "joi-date-extensions": "^1.1.1",
     "msg91": "0.0.6",
     "pg": "^7.4.1",
     "sequelize": "^4.32.2",

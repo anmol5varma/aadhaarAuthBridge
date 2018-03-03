@@ -44,13 +44,13 @@ describe('Testing the hapi server for GET request', () => {
       payload: {
         aadhaarNo: '123412341234',
         name: 'Anmol varma',
-        dob: new Date('26-10-1996'),
+        dob: '26-10-1996',
         gender: 'Male',
         contact: '8098469331',
         co: 'S/O Varma ji',
         house: '120/210',
         street: 'Lajpat Nagar',
-        landmark: '',
+        landmark: 'abcd',
         locality: 'locality',
         subDistrict: 'Kanpur nagar',
         district: 'Kanpur',
@@ -59,6 +59,7 @@ describe('Testing the hapi server for GET request', () => {
       },
     };
     Server.inject(options, (response) => {
+      console.log(response.result);
       expect(response.result.statusCode).toBe(200);
       done();
     });
@@ -76,7 +77,7 @@ describe('Testing the hapi server for GET request', () => {
         co: 'S/O Varma ji',
         house: '120/210',
         street: 'Lajpat Nagar',
-        landmark: '',
+        landmark: 'efgh',
         locality: 'locality',
         subDistrict: 'Kanpur nagar',
         district: 'Kanpur',
