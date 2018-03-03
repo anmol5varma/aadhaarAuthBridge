@@ -1,15 +1,17 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var otp_verify = sequelize.define('otp_verify', {
-    aadhaar_id: DataTypes.STRING,
+  const otpVerify = sequelize.define('otp_verify', {
+    aadhaar_id: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     otp: DataTypes.INTEGER,
-    token: DataTypes.STRING
+    token: DataTypes.STRING,
   }, {
     classMethods: {
-      associate: function(models) {
+      associate(models) {
         // associations can be defined here
-      }
-    }
+      },
+    },
   });
-  return otp_verify;
+  return otpVerify;
 };
