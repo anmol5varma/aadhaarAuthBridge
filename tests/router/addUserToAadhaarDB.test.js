@@ -37,7 +37,7 @@ describe('Testing the hapi server for GET request', () => {
     }).catch();
   });
 
-  test('Valid status code for correct password', (done) => {
+  test('Valid status code for the api', (done) => {
     const options = {
       method: 'POST',
       url: '/user',
@@ -64,7 +64,7 @@ describe('Testing the hapi server for GET request', () => {
       done();
     });
   });
-  test('Valid status code for correct password', (done) => {
+  test('Trying to make multiple entries with same aadhaar number', (done) => {
     const options = {
       method: 'POST',
       url: '/user',
@@ -87,6 +87,58 @@ describe('Testing the hapi server for GET request', () => {
     };
     Server.inject(options, (response) => {
       expect(response.result.statusCode).toBe(500);
+      done();
+    });
+  });
+  test('Invalid status code for wrong aadhaar number', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/user',
+      payload: {
+        aadhaarNo: '3412341235',
+        name: 'Anmol varma',
+        dob: '02-09-1989',
+        gender: 'Male',
+        contact: '8976576500',
+        co: 'S/O Varma ji',
+        house: '120/210',
+        street: 'Lajpat Nagar',
+        landmark: 'efgh',
+        locality: 'locality',
+        subDistrict: 'Kanpur nagar',
+        district: 'Kanpur',
+        state: 'Uttar Pradesh',
+        pincode: '208005',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.validation.keys[0]).toBe('aadhaarNo');
+      done();
+    });
+  });
+  test('Invalid status code for wrong aadhaar number', (done) => {
+    const options = {
+      method: 'POST',
+      url: '/user',
+      payload: {
+        aadhaarNo: '3412341235',
+        name: 'Anmol varma',
+        dob: '02-09-1989',
+        gender: 'Male',
+        contact: '8976576500',
+        co: 'S/O Varma ji',
+        house: '120/210',
+        street: 'Lajpat Nagar',
+        landmark: 'efgh',
+        locality: 'locality',
+        subDistrict: 'Kanpur nagar',
+        district: 'Kanpur',
+        state: 'Uttar Pradesh',
+        pincode: '208005',
+      },
+    };
+    Server.inject(options, (response) => {
+      expect(response.result.statusCode).toBe(400);
       done();
     });
   });

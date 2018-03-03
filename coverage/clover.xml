@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1520103550207" clover="3.2.0">
-  <project timestamp="1520103550207" name="All files">
+<coverage generated="1520104602301" clover="3.2.0">
+  <project timestamp="1520104602301" name="All files">
     <metrics statements="82" coveredstatements="62" conditionals="17" coveredconditionals="7" methods="15" coveredmethods="8" elements="114" coveredelements="77" complexity="0" loc="82" ncloc="82" packages="3" files="7" classes="7">
       <package name="authBridge">
         <metrics statements="11" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="1" coveredmethods="0"/>
