@@ -11,8 +11,8 @@ module.exports = [
   {
     method: 'POST',
     path: '/otp',
-    handler: (request, reply) => {
-      Models.user.findOne({ where: { aadhaar_id: request.payload.aadhaarNo } }).then((response) => {
+    handler: (request, reply) => Models.user
+      .findOne({ where: { aadhaar_id: request.payload.aadhaarNo } }).then((response) => {
         if (response === null) {
           return reply({ statusCode: 204, message: 'Invalid aadhaar number.' });
         }
@@ -31,6 +31,5 @@ module.exports = [
             statusCode: 200, verificationToken: queryResult.token, message: 'OTP sent to user',
           });
         }));
-      }).catch(err => reply({ statusCode: 500, message: 'Server error', error: err.message }));
-    },
+      }).catch(err => reply({ statusCode: 500, message: 'Server error', error: err.message })),
   }];
