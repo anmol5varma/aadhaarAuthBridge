@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for authBridge/routes/sendOtpToUser.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">authBridge/routes</a> sendOtpToUser.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">26.32% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>5/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">26.32% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>5/19</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const uuidv1 = require('uuid/v1');
+const msg91 = require('msg91')('199605AlBxU1LOFG5a90f82e', 'PgBank', '4');
+const Models = require('../models');
+&nbsp;
+const generateOTP = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+  const otp = <span class="cstat-no" title="statement not covered" >Math.floor(1000 + (Math.random() * 9000));</span>
+<span class="cstat-no" title="statement not covered" >  return otp;</span>
+};
+&nbsp;
+module.exports = [
+  {
+    method: 'POST',
+    path: '/otp',
+    handler: <span class="fstat-no" title="function not covered" >(r</span>equest, reply) =&gt; {
+<span class="cstat-no" title="statement not covered" >      Models.user.findOne({ where: { aadhaar_id: request.payload.aadhaarNo } }).then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (response === null) {</span>
+<span class="cstat-no" title="statement not covered" >          return reply({ statusCode: 204, message: 'Invalid aadhaar number.' });</span>
+        }
+        const userToken = <span class="cstat-no" title="statement not covered" >uuidv1();</span>
+        const otp = <span class="cstat-no" title="statement not covered" >generateOTP();</span>
+        const mobileNo = <span class="cstat-no" title="statement not covered" >response.contact;</span>
+<span class="cstat-no" title="statement not covered" >        return Models.otp_verify.findOrCreate({</span>
+          where: { aadhaar_id: response.aadhaar_id }, defaults: { otp, token: userToken },
+        }).spread(<span class="fstat-no" title="function not covered" >qu</span>eryResult =&gt; <span class="cstat-no" title="statement not covered" >msg91.send(mobileNo, `Your otp is ${queryResult.otp} for verification.`, <span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            return reply({</span>
+              statusCode: 500, verificationToken: null, message: 'Error with messaging service',
+            });
+          }
+<span class="cstat-no" title="statement not covered" >          return reply({</span>
+            statusCode: 200, verificationToken: queryResult.token, message: 'OTP sent to user',
+          });
+        }));
+      }).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; <span class="cstat-no" title="statement not covered" >reply({ statusCode: 500, message: 'Server error', error: err.message }))</span>;
+    },
+  }];
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Mar 03 2018 23:53:29 GMT+0530 (IST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

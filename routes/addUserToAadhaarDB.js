@@ -21,7 +21,8 @@ module.exports = [
       userObject.state = request.payload.state;
       userObject.pc = request.payload.pincode;
       userObject.po = request.payload.pincode;
-      Models.user.create(userObject).then(() => reply({ statusCode: 200, message: 'Person added' }))
+      console.log(userObject, '>>');
+      return Models.user.create(userObject).then(() => reply({ statusCode: 200, message: 'Person added' }))
         .catch(err => reply({ statusCode: 500, message: 'Database error', error: err.message }));
     },
   }];
