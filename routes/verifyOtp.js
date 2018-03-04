@@ -56,7 +56,37 @@ module.exports = [
             return reply(responseObjectWithKYC);
           });
         }
-        return reply({ statusCode: 401, message: 'Invalid otp' });
+        const responseObjectWithoutKYC = {
+          user_id: '',
+          aadhaar_id: '',
+          e_Kyc: {
+            Poi: {},
+            Poa: {},
+          },
+          time: '',
+          ver: '',
+        };
+        responseObjectWithoutKYC.user_id = null;
+        responseObjectWithoutKYC.aadhaar_id = request.payload.aadhaarNo;
+        responseObjectWithoutKYC.e_Kyc.status = 'n';
+        responseObjectWithoutKYC.e_Kyc.Description = 'Authentication failed';
+        responseObjectWithoutKYC.e_Kyc.Poi.Name = null;
+        responseObjectWithoutKYC.e_Kyc.Poi.Dob = null;
+        responseObjectWithoutKYC.e_Kyc.Poi.Gender = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.co = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.house = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.street = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.landmark = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.lc = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.subdist = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.dist = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.state = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.pc = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.po = null;
+        responseObjectWithoutKYC.e_Kyc.Poa.uidtag = null;
+        responseObjectWithoutKYC.time = new Date();
+        responseObjectWithoutKYC.ver = 2.1;
+        return reply(responseObjectWithoutKYC);
       }).catch(err => reply({ statusCode: 500, message: 'Server error', error: err.message }));
     },
   }];
