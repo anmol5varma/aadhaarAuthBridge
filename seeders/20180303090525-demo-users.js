@@ -36,6 +36,24 @@ module.exports = {
       po: '560048',
       createdAt: new Date(),
       updatedAt: new Date(),
+    }, {
+      aadhaar_id: '123456789009',
+      name: 'Surabhi gupta',
+      dob: new Date(1996, 9, 26),
+      gender: 'female',
+      contact: '8527961109',
+      co: 'S/O L. N. Varma',
+      house: '120/210',
+      street: 'Lajpat nagar',
+      landmark: '',
+      lc: 'Lajpat nagar',
+      subdist: 'Kanpur nagar',
+      dist: 'Kanpur',
+      state: 'Uttar pradesh',
+      pc: '208005',
+      po: '208005',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }], {}), /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
