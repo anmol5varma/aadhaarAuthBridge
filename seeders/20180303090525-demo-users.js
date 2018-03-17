@@ -36,6 +36,24 @@ module.exports = {
       po: '560048',
       createdAt: new Date(),
       updatedAt: new Date(),
+    }, {
+      aadhaar_id: '123456789123',
+      name: 'Radhika Varma',
+      dob: new Date(1996, 3, 2),
+      gender: 'female',
+      contact: '9626563322',
+      co: 'S/O Jindal industires',
+      house: '30/1',
+      street: '6th street',
+      landmark: 'Kat homes',
+      lc: 'Mahadevpura',
+      subdist: 'Bengaluru',
+      dist: 'Bengaluru',
+      state: 'Karnatak',
+      pc: '560048',
+      po: '560048',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }], {}), /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
