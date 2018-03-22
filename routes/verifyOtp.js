@@ -61,6 +61,7 @@ module.exports = [
             responseObjectWithKYC.aadhaar_id = responseForAadhaarNumber.aadhaar_id;
             responseObjectWithKYC.e_Kyc.status = 'y';
             responseObjectWithKYC.e_Kyc.Description = 'Authenticated Successfully';
+            responseObjectWithKYC.e_Kyc.Poi.contact = responseForAadhaarNumber.contact;
             responseObjectWithKYC.e_Kyc.Poi.Name = responseForAadhaarNumber.name;
             responseObjectWithKYC.e_Kyc.Poi.Dob = responseForAadhaarNumber.dob;
             responseObjectWithKYC.e_Kyc.Poi.Gender = responseForAadhaarNumber.gender;
