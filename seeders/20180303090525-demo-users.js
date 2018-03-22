@@ -54,6 +54,24 @@ module.exports = {
       po: '560048',
       createdAt: new Date(),
       updatedAt: new Date(),
+    }, {
+      aadhaar_id: '293016787455',
+      name: 'Sagar R Gugwad',
+      dob: new Date(1987, 8, 29),
+      gender: 'Male',
+      contact: '7829730769',
+      co: 'Sagar Gugwad',
+      house: 'F-106 Sumadhura Pranavam ',
+      street: 'Graphite India Road',
+      landmark: 'Beside Kamat Hotel',
+      lc: 'Hoodi',
+      subdist: 'Bengaluru North',
+      dist: 'Bengaluru',
+      state: 'Karnatak',
+      pc: '560048',
+      po: '560048',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }], {}), /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
