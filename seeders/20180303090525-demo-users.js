@@ -16,6 +16,7 @@ module.exports = {
       state: 'Uttar pradesh',
       pc: '208005',
       po: '208005',
+      email: 'pari815@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
@@ -34,6 +35,7 @@ module.exports = {
       state: 'Karnatak',
       pc: '560048',
       po: '560048',
+      email: 'pari815@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
@@ -52,6 +54,7 @@ module.exports = {
       state: 'Karnatak',
       pc: '560048',
       po: '560048',
+      email: 'pari815@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     }, {
@@ -70,6 +73,7 @@ module.exports = {
       state: 'Karnatak',
       pc: '560048',
       po: '560048',
+      email: 'pari815@gmail.com',
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {}), /*
