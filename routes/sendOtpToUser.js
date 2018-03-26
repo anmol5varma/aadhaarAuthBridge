@@ -17,13 +17,24 @@ module.exports = [
           return reply({ statusCode: 204, message: 'Invalid aadhaar number.' });
         }
         const userToken = uuidv1();
-        const otp = 1234;
+        const otp = generateOTP();
         const mobileNo = response.contact;
         return Models.otp_verify.findOrCreate({
           where: { aadhaar_id: response.aadhaar_id }, defaults: { otp, token: userToken },
         })
-          .spread((queryResult) => {
-            if (queryResult === null) {
+          // .spread((queryResult) => {
+          //   if (queryResult === null) {
+          //     return reply({
+          //       statusCode: 500,
+          //       verificationToken: null, message: 'Error with messaging service',
+          //     });
+          //   }
+          //   return reply({
+          //     statusCode: 200, verificationToken: queryResult.token, message: 'OTP sent to user',
+          //   });
+          // });
+          .spread(queryResult => msg91.send(mobileNo, `Your otp is ${queryResult.otp} for verification.`, (err) => {
+            if (err) {
               return reply({
                 statusCode: 500, verificationToken: null, message: 'Error with messaging service',
               });
@@ -31,16 +42,6 @@ module.exports = [
             return reply({
               statusCode: 200, verificationToken: queryResult.token, message: 'OTP sent to user',
             });
-          });
-        // .spread(queryResult => msg91.send(mobileNo, `Your otp is ${queryResult.otp} for verification.`, (err) => {
-        //   if (err) {
-        //     return reply({
-        //       statusCode: 500, verificationToken: null, message: 'Error with messaging service',
-        //     });
-        //   }
-        //   return reply({
-        //     statusCode: 200, verificationToken: queryResult.token, message: 'OTP sent to user',
-        //   });
-        // }));
+          }));
       }).catch(err => reply({ statusCode: 500, message: 'Server error', error: err.message })),
   }];
