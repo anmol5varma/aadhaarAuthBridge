@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.STRING,
     pc: DataTypes.INTEGER,
     po: DataTypes.INTEGER,
+    email: DataTypes.STRING,
   }, {
     classMethods: {
       associate() {
