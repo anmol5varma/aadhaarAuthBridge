@@ -35,7 +35,7 @@ module.exports = [
           aadhaarNo: Joi.string().regex(/^[1-9]{1}[0-9]{11}$/).required(),
           name: Joi.string().regex(/^[a-zA-Z][a-zA-Z ]*$/).required(),
           dob: Joi.date().format('DD-MM-YYYY').required(),
-          email: Joi.email().required(),
+          email: Joi.string().email().required(),
           gender: Joi.string().regex(/^(male|female|others)$/i).required(),
           contact: Joi.string().min(10).regex(/^[1-9]{1}[0-9]{9}$/).required(),
           co: Joi.string().regex(/^[a-zA-Z][a-zA-Z /]*$/).required(),
